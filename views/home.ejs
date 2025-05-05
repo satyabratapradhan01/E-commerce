@@ -254,6 +254,10 @@
     </section> -->
 
     <!-- Categories Section -->
+
+    <form method="get" action="/item/new">
+        <button >Add Products</button>
+    </form>
    
 
     <!-- Products Section -->
@@ -270,20 +274,23 @@
         </div>
         <div class="products-grid">
             <!-- Product 1 -->
-            <div class="product-card" data-category="electronics">
-                <div class="product-image">
-                    <img src="/api/placeholder/300/200" alt="Wireless Headphones">
+
+            <% for( item of items ) { %>
+                <div class="product-card" data-category="electronics">
+                    <div class="product-image">
+                        <img src="<%= item.img %>" alt="Wireless Headphones">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category"><%= item.title %></div>
+                        <h3 class="product-title"><%= item.description %></h3>
+                        <div class="product-price"><%= item.price %></div>
+                        <!-- <button class="add-to-cart">Add to Cart</button> -->
+                    </div>
                 </div>
-                <div class="product-info">
-                    <div class="product-category">Electronics</div>
-                    <h3 class="product-title">Premium Wireless Headphones</h3>
-                    <div class="product-price">$129.99</div>
-                    <button class="add-to-cart">Add to Cart</button>
-                </div>
-            </div>
+            <% } %>
             
             <!-- Product 2 -->
-            <div class="product-card" data-category="clothing">
+            <!-- <div class="product-card" data-category="clothing">
                 <div class="product-image">
                     <img src="/api/placeholder/300/200" alt="Summer T-Shirt">
                 </div>
@@ -293,10 +300,10 @@
                     <div class="product-price">$24.99</div>
                     <button class="add-to-cart">Add to Cart</button>
                 </div>
-            </div>
+            </div> -->
             
             <!-- Product 3 -->
-            <div class="product-card" data-category="accessories">
+            <!-- <div class="product-card" data-category="accessories">
                 <div class="product-image">
                     <img src="/api/placeholder/300/200" alt="Leather Wallet">
                 </div>
@@ -306,10 +313,10 @@
                     <div class="product-price">$49.99</div>
                     <button class="add-to-cart">Add to Cart</button>
                 </div>
-            </div>
+            </div> -->
             
             <!-- Product 4 -->
-            <div class="product-card" data-category="electronics">
+            <!-- <div class="product-card" data-category="electronics">
                 <div class="product-image">
                     <img src="/api/placeholder/300/200" alt="Smart Watch">
                 </div>
@@ -319,10 +326,10 @@
                     <div class="product-price">$89.99</div>
                     <button class="add-to-cart">Add to Cart</button>
                 </div>
-            </div>
+            </div> -->
             
             <!-- Product 5 -->
-            <div class="product-card" data-category="home">
+            <!-- <div class="product-card" data-category="home">
                 <div class="product-image">
                     <img src="/api/placeholder/300/200" alt="Coffee Maker">
                 </div>
@@ -332,10 +339,10 @@
                     <div class="product-price">$79.99</div>
                     <button class="add-to-cart">Add to Cart</button>
                 </div>
-            </div>
+            </div> -->
             
             <!-- Product 6 -->
-            <div class="product-card" data-category="sports">
+            <!-- <div class="product-card" data-category="sports">
                 <div class="product-image">
                     <img src="/api/placeholder/300/200" alt="Yoga Mat">
                 </div>
@@ -345,10 +352,10 @@
                     <div class="product-price">$34.99</div>
                     <button class="add-to-cart">Add to Cart</button>
                 </div>
-            </div>
+            </div> -->
             
             <!-- Product 7 -->
-            <div class="product-card" data-category="beauty">
+            <!-- <div class="product-card" data-category="beauty">
                 <div class="product-image">
                     <img src="/api/placeholder/300/200" alt="Facial Serum">
                 </div>
@@ -358,10 +365,10 @@
                     <div class="product-price">$29.99</div>
                     <button class="add-to-cart">Add to Cart</button>
                 </div>
-            </div>
+            </div> -->
             
             <!-- Product 8 -->
-            <div class="product-card" data-category="clothing">
+            <!-- <div class="product-card" data-category="clothing">
                 <div class="product-image">
                     <img src="/api/placeholder/300/200" alt="Denim Jacket">
                 </div>
@@ -372,78 +379,11 @@
                     <button class="add-to-cart">Add to Cart</button>
                 </div>
             </div>
-        </div>
+        </div> -->
+
     </section>
-    <%- include('./includes/footer.ejs') %>
 
     <!-- Footer -->
-    
-
-    <!-- <script>
-        // Product Filtering Functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const filterButtons = document.querySelectorAll('.filter-button');
-            const productCards = document.querySelectorAll('.product-card');
-            
-            filterButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    // Remove active class from all buttons
-                    filterButtons.forEach(btn => btn.classList.remove('active'));
-                    
-                    // Add active class to clicked button
-                    button.classList.add('active');
-                    
-                    const filter = button.getAttribute('data-filter');
-                    
-                    // Show all products if 'all' is selected, otherwise filter
-                    productCards.forEach(card => {
-                        if (filter === 'all' || card.getAttribute('data-category') === filter) {
-                            card.style.display = 'block';
-                        } else {
-                            card.style.display = 'none';
-                        }
-                    });
-                });
-            });
-            
-            // Shopping Cart Functionality
-            const addToCartButtons = document.querySelectorAll('.add-to-cart');
-            const cartCountElement = document.querySelector('.cart-count');
-            let cartCount = 0;
-            
-            addToCartButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    cartCount++;
-                    cartCountElement.textContent = cartCount;
-                    
-                    // Animation for button
-                    button.textContent = 'Added!';
-                    button.style.backgroundColor = '#4CAF50';
-                    
-                    setTimeout(() => {
-                        button.textContent = 'Add to Cart';
-                        button.style.backgroundColor = '#3f51b5';
-                    }, 1500);
-                });
-            });
-            
-            // Smooth scrolling for navigation links
-            const navLinks = document.querySelectorAll('.nav-links a');
-            
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    const targetId = this.getAttribute('href');
-                    const targetSection = document.querySelector(targetId);
-                    
-                    window.scrollTo({
-                        top: targetSection.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                });
-            });
-        });
-    </script> -->
+    <%- include('./includes/footer.ejs') %>
 </body>
 </html>
