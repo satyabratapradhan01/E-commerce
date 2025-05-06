@@ -31,7 +31,7 @@ app.get("/item", async(req, res) =>{
 
 //add new product
 app.get("/item/new", (req, res) => {
-    res.render("newItem");
+    res.render("./admin/addNewProduct");
 });
 
 //add item
@@ -81,7 +81,7 @@ app.put("/item/:id", async (req, res) => {
         },
         {runValidaters: true, new: true}
     );
-    console.log(UpdateItem)
+    // console.log(UpdateItem)
     res.redirect("/item/allitem")
 })
 
