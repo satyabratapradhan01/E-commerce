@@ -3,14 +3,21 @@ const app = express();
 const port = 8080;
 const mongoose = require('mongoose');
 const Path = require('path');
-const Item = require('./models/item.js');
+const cookieParser = require('cookie-parser')
 const methodOverride = require('method-override');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
+const Item = require('./models/item.js');
+const adminUser = require('./models/adminuser.js');
+const { hash } = require('crypto');
 
 app.set("view engine", "ejs");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
 app.use(express.static(Path.join(__dirname, 'public')));
 app.use(methodOverride('_method'));
+app.use(cookieParser());
 
 
 
@@ -98,6 +105,52 @@ app.delete("/item/:id", async (req, res) => {
     let deleteItem = await Item.findByIdAndDelete(id);
     res.redirect("/item/allitem")
 })
+
+//Admin login and sign up
+
+app.get("/admin", (req, res) => {
+    res.render('./admin/adminLogin');
+})
+
+app.get("/signup", (req, res) => {
+    res.render('./admin/adminSignup');
+})
+//Admin sign up
+app.post("/adminCreate",  (req, res) => {
+    const {username, email, password} = req.body;
+    bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(password, salt, async (err, hars) => {
+            const adminCreate = await adminUser.create({
+                username,
+                email,
+                password: hars
+            })
+
+            let token = jwt.sign({email}, "password");
+            res.cookie("token", token);
+            res.redirect("/admin");
+        })
+    })
+    
+
+})
+
+//Admin login
+
+app.post("/adminLogin", async (req, res) => {
+    let user = await adminUser.findOne({email: req.body.email});
+    if(!user) return res.send("somting is worng")
+    
+    bcrypt.compare(req.body.password, user.password, (err, result) => {
+        if(result){
+            let token = jwt.sign({email: user.emai}, "password");
+            res.cookie("token", token);
+            res.redirect('/item/allitem')
+        }
+        else res.send("somthing is wrong")
+    })
+})
+
 
 
 app.listen(port, ()=>{
