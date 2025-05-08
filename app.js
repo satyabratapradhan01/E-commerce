@@ -10,6 +10,7 @@ const jwt = require('jsonwebtoken');
 
 const Item = require('./models/item.js');
 const adminUser = require('./models/adminuser.js');
+const Category = require('./models/category.js');
 const { hash } = require('crypto');
 
 app.set("view engine", "ejs");
@@ -52,7 +53,6 @@ app.post("/items", (req, res) => {
     })
     newItem.save().then((res) => {
         console.log(req.body);
-        console.log("chat was saved....");
     }).catch((err) =>{
         console.log(err);
     })
@@ -60,7 +60,6 @@ app.post("/items", (req, res) => {
 })
 
 //show all product
-
 app.get("/item/allitem", async(req, res) =>{
     let items = await Item.find();
     res.render("./admin/productManagement", {items});
@@ -145,10 +144,36 @@ app.post("/adminLogin", async (req, res) => {
         if(result){
             let token = jwt.sign({email: user.emai}, "password");
             res.cookie("token", token);
-            res.redirect('/item/allitem')
+            res.render('./admin/adminDashbord.ejs')
         }
         else res.send("somthing is wrong")
     })
+})
+
+//  product category
+app.get('/category', (rq, res) =>{
+    res.render('./admin/productCategory.ejs');
+})
+
+app.post('/productCategory', (req, res) => {
+    let {productType, status} = req.body;
+
+    let newCatagory = new Category({
+        productType: productType,
+        status: status
+    })
+
+    newCatagory.save();
+    res.send('your product is save.....')
+})
+
+
+
+
+
+//thesatya
+app.get('/satya', (req, res) =>{
+    res.render('./admin/adminDashbord.ejs')
 })
 
 
