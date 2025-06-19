@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 const categorySchema = new mongoose.Schema({
     productType: {
@@ -8,6 +9,10 @@ const categorySchema = new mongoose.Schema({
     status: {
         type: String,
         default: 'active' 
+    },
+    seller: {
+        type: Schema.Types.ObjectId,
+        ref: "user"
     }
 });
 

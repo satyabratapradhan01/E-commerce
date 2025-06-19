@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const adminUserSchema = new mongoose.Schema({
     username: {
         type: String,
-        required: true    // typo fixed: "require" ➝ "required"
+        required: true   
     },
     email: {
         type: String,
@@ -17,4 +17,4 @@ const adminUserSchema = new mongoose.Schema({
 
 const adminUser = mongoose.model('adminUser', adminUserSchema);
 
-module.exports = adminUser;  // typo fixed: "module.export" ➝ "module.exports"
+module.exports = adminUser;  

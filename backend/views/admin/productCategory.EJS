@@ -64,7 +64,8 @@
 
   <div class="form-container">
     <h2>Create Product Category</h2>
-    <form action="/productCategory" method="POST">
+    <form action="/item/<%= User.id %>/productCategory" method="POST">
+      <h4>hello <%= User.id %></h4>
       <label for="category">Product Type</label>
       <input type="text" id="category" name="productType"  required>
 

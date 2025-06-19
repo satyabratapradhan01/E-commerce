@@ -1,4 +1,7 @@
 const mongoose = require("mongoose");
+const Category = require("./category");
+const Schema = mongoose.Schema;
+
 
 const itemSchema = ({
     img: {
@@ -16,8 +19,18 @@ const itemSchema = ({
     price:{
         type: Number,
         require: true
+    },
+    Category: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "category"
+        }
+    ],
+    seller: {
+        type: Schema.Types.ObjectId,
+        ref: "user"
     }
-})
+});
 
 
 const Item = mongoose.model("Item", itemSchema);
