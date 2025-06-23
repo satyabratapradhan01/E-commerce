@@ -6,6 +6,7 @@ import Navbar from './component/NavBar'
 import { BrowserRouter, Route, Router, Routes } from 'react-router-dom'
 import Hero from './component/Hero'
 import About from './component/About'
+import Footer from "./component/Footer";
 
 function App() {
   
@@ -19,6 +20,7 @@ function App() {
         <Route path='/about' element={<About />} />
       </Routes>
      </BrowserRouter>
+     <Footer />
     </>
   )
 }

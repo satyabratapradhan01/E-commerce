@@ -10,7 +10,7 @@ export default function Navbar() {
   const toggleSearch = () => setIsSearchOpen(!isSearchOpen);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    
       <nav className="bg-white/95 backdrop-blur-lg border-b border-gray-200 shadow-lg sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
@@ -136,7 +136,7 @@ export default function Navbar() {
           {isMenuOpen && (
             <div className="md:hidden border-t border-gray-200 py-4 animate-in slide-in-from-top-4 duration-300">
               <div className="flex flex-col space-y-2">
-                <a href="#" className="text-gray-700 hover:text-black font-medium px-4 py-3 rounded-lg hover:bg-gray-100 transition-all duration-200">
+                <a href="/" className="text-gray-700 hover:text-black font-medium px-4 py-3 rounded-lg hover:bg-gray-100 transition-all duration-200">
                   Home
                 </a>
                 <a href="#" className="text-gray-700 hover:text-black font-medium px-4 py-3 rounded-lg hover:bg-gray-100 transition-all duration-200">
@@ -168,6 +168,6 @@ export default function Navbar() {
           )}
         </div>
       </nav>
-    </div>
+  
   );
 }
