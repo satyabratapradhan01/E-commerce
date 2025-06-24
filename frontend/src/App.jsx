@@ -1,27 +1,32 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import Navbar from './component/NavBar'
-import { BrowserRouter, Route, Router, Routes } from 'react-router-dom'
-import Hero from './component/Hero'
-import About from './component/About'
-import Footer from "./component/Footer";
+import React from 'react'
+import { Route, Routes } from 'react-router-dom'
+import Home from './pages/Home'
+import Collection from './pages/Collection'
+import About from './pages/About'
+import Contact from './pages/Contact'
+import Product from './pages/Product'
+import Login from './pages/Login'
+import Orders from './pages/Orders'
+import NavBar from './components/NavBar'
+import Cart from './pages/Cart'
+import PlaceOrder from './pages/PlaceOrder'
 
-function App() {
-  
-
+const App = () => {
   return (
-    <>
-    <Navbar />
-    <BrowserRouter>
+    <div className='px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]' >
+      <NavBar />
       <Routes>
-        <Route path='/' element={<Hero />} />
-        <Route path='/about' element={<About />} />
+        <Route path='/' element={ <Home /> } />
+        <Route path='/collection' element={ <Collection /> } />
+        <Route path='/about' element={<About /> } />
+        <Route path='/contact' element={<Contact /> } />
+        <Route path='/product/:productId' element={<Product /> } />
+        <Route path='/cart' element={<Cart /> } />
+        <Route path='/login' element={<Login/> } />
+        <Route path='/place-order' element={<PlaceOrder /> } />
+        <Route path='/orders' element={<Orders /> } />
       </Routes>
-     </BrowserRouter>
-     <Footer />
-    </>
+    </div>
   )
 }
 
