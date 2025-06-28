@@ -7,7 +7,7 @@ import { ShopContext } from '../context/ShopContext';
 const NavBar = () => {
     const [visible, setVisible] = useState(false);
     const {setShowSearch, showSearch} = useContext(ShopContext);
-    console.log("navbar:", showSearch)
+    // console.log("navbar:", showSearch)
 
     return (
         <div className='flex items-center justify-between py-5 font-medium'>
