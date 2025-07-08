@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Title from '../components/Title'
 import CartTotal from '../components/CartTotal'
 import { assets } from '../assets/frontend_assets/assets'
+import { ShopContext } from '../context/ShopContext'
 
 const PlaceOrder = () => {
 
   const [method, setMethode] = useState('cod');
+  const {navigate} = useContext(ShopContext);
 
 
   return (
@@ -55,6 +57,10 @@ const PlaceOrder = () => {
               <p className={`min-w-3.5 h-3.5 border rounded-full ${method === 'cod' ? 'bg-green-400' : ''}`}></p>
               <p className='text-gray-500 text-sm font-medium mx-4'>CASH ON DELIVERY</p>
             </div>
+          </div>
+
+          <div className='w-full text-end mt-8'>
+            <button onClick={()=> navigate('/orders')} className='bg-black text-white px-16 py-3 text-sm '>PLACE ORDER</button>
           </div>
         </div>
       </div>
