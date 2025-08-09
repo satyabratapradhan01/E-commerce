@@ -28,17 +28,17 @@ const PlaceOrder = () => {
     setFormData(data => ({ ...data, [name]: value }));
   }
 
-  const onSubmitHandler = async(event) => {
+  const onSubmitHandler = async (event) => {
     event.preventDefault();
     try {
-      
+
       let orderItems = [];
 
-      for(const items in cartItems){
-        for(const item in cartItems[items]){
-          if(cartItems[items][item] > 0){
+      for (const items in cartItems) {
+        for (const item in cartItems[items]) {
+          if (cartItems[items][item] > 0) {
             const itemInfo = structuredClone(products.find(product => product._id === items));
-            if (itemInfo){
+            if (itemInfo) {
               itemInfo.size = item;
               itemInfo.quantity = cartItems[items][item];
               orderItems.push(itemInfo)
@@ -53,17 +53,27 @@ const PlaceOrder = () => {
         amount: getCartAmount() + delivery_fee
       }
 
-      switch (method){
+      switch (method) {
 
         case 'cod':
-          const response = await axios.post(backendUrl + '/api/order/place', orderData, {headers:{token}});
-          if(response.data.success){
+          const response = await axios.post(backendUrl + '/api/order/place', orderData, { headers: { token } });
+          if (response.data.success) {
             setCartItems({})
             navigate('/orders')
           } else {
             toast.error(response.data.message);
           }
-        break;
+          break;
+
+        case 'stripe':
+          const responseStripe = await axios.post(backendUrl + '/api/order/stripe', orderData, { headers: { token } });
+          if(responseStripe.data.success) {
+            const {session_url} = responseStripe.data
+            window.location.replace(session_url)
+          }else{
+            toast.error(responseStripe.data.message);
+          }
+          break;
 
         default:
           break;
