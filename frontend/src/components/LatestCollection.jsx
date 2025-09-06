@@ -5,7 +5,7 @@ import ProductItem from './ProductItem';
 
 
 const LatestCollection = () => {
-  const {products} = useContext(ShopContext)
+  const { products } = useContext(ShopContext)
   // console.log(products);
   const [latestProducts, setLatestProducts] = useState([]);
 
@@ -18,7 +18,7 @@ const LatestCollection = () => {
       <div className='text-center py-8 text-3xl'>
         <Title text1={'LATEST'} text2={'COLLECTION'} />
         <p className='W-3/4 m-auto text-xs sm:text-sm md:text-base text-gray-600'>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam adipisci suscipit quam porro aliquam repudiandae reprehenderit, perspiciatis soluta reiciendis, deserunt quaerat quisquam saepe laboriosam nisi similique corporis dolores distinctio earum?
+           The Latest Collection brings you fresh trends, premium fabrics, and statement pieces that elevate your wardrobe. From casual wear to chic outfits, each design is crafted to blend comfort with style. Explore the season’s must-haves and be the first to own fashion that’s made to inspire.
         </p>
       </div>
       {/* Rendering Products */}
