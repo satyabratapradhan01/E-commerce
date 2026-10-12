@@ -19,15 +19,21 @@ const Login = () => {
         if (response.data.success) {
           setToken(response.data.token);
           localStorage.setItem('token', response.data.token);
+          localStorage.setItem('userName', name);
+          localStorage.setItem('userEmail', email);
         } else {
           toast.error(response.data.message);
         }
       } else {
         const response = await axios.post(backendUrl + '/api/user/login', { email, password });
-        console.log(response.data);
+        // console.log(response.data);
         if (response.data.success) {
           setToken(response.data.token);
           localStorage.setItem('token', response.data.token);
+          localStorage.setItem('userEmail', email);
+          if (response.data.user && response.data.user.name) {
+            localStorage.setItem('userName', response.data.user.name);
+          }
         } else {
           toast.error(response.data.message);
         }

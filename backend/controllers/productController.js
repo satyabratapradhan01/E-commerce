@@ -35,7 +35,7 @@ const addProduct = async(req, res) => {
         }
 
         const product = new productModel(productData);
-        // await product.save();
+        await product.save();
 
         res.json({ success: true, message: 'Product Added'});
     } catch (error) {

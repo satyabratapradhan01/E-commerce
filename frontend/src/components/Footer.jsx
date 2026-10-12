@@ -23,13 +23,13 @@ we’re a lifestyle. Our mission is to bring you high-quality, trendy, and affor
                 <p className='text-xl font-medium mb-5'>GET IN TOUCH</p>
                 <ul className='flex flex-col gap-1 text-gray-600'>
                     <li>+19-77-88899-500</li>
-                    <li>shubhamnayak@gmail.com</li>
+                    <li>Clothify@gmail.com</li>
                 </ul>
             </div>
         </div>
         <div>
             <hr />
-            <p className='py-5 text-sm text-center'>Copyright 2025@ NayakTreder.com - All Right Reserved</p>
+            <p className='py-5 text-sm text-center'>Copyright 2025@ Clothify.com - All Right Reserved</p>
         </div>
     </div>
   )

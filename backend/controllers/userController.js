@@ -23,7 +23,7 @@ const loginUser = async (req, res) => {
 
     if (isMatch) {
       const token = createToken(user._id);
-      res.json({ success: true, token });
+      res.json({ success: true, token, user: { id: user._id, name: user.name, email: user.email } });
     } else {
       res.json({ success: false, message: "Invalid credentials" });
     }
@@ -71,7 +71,7 @@ const registerUser = async (req, res) => {
 
     const user = await newUser.save();
     const token = createToken(user._id);
-    res.json({ success: true, token });
+    res.json({ success: true, token, user: { id: user._id, name: user.name, email: user.email } });
   } catch (error) {
     console.log(error);
     res.json({ success: false, message: error.message });
@@ -95,5 +95,34 @@ const adminLogin = async (req, res) => {
   }
 };
 
+// Router for getting user profile
+const getUserProfile = async (req, res) => {
+  try {
+    const { userId } = req.body;
+    const user = await userModel.findById(userId).select('-password');
+    if (!user) {
+      return res.json({ success: false, message: "User not found" });
+    }
+    res.json({ success: true, user });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
 
-export { loginUser, registerUser, adminLogin };
+// Router for updating user profile
+const updateUserProfile = async (req, res) => {
+  try {
+    const { userId, name } = req.body;
+    if (!name || name.trim() === '') {
+      return res.json({ success: false, message: "Name cannot be empty" });
+    }
+    const user = await userModel.findByIdAndUpdate(userId, { name: name.trim() }, { new: true }).select('-password');
+    res.json({ success: true, message: "Profile updated successfully", user });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
+
+export { loginUser, registerUser, adminLogin, getUserProfile, updateUserProfile };

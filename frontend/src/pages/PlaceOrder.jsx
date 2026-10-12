@@ -47,6 +47,17 @@ const PlaceOrder = () => {
         }
       }
 
+      if (!token) {
+        toast.error("Please login to place an order");
+        navigate('/login');
+        return;
+      }
+
+      if (orderItems.length === 0) {
+        toast.error("Your cart is empty");
+        return;
+      }
+
       let orderData = {
         address: formData,
         items: orderItems,
@@ -109,7 +120,7 @@ const PlaceOrder = () => {
           <input required onChange={onChangeHandler} name='zipcode' value={formData.zipcode} className='border border-gray-300 rounded py-1.5 px-3.5 w-full' placeholder='PIN-code' type="number" />
           <input required onChange={onChangeHandler} name='country' value={formData.country} className='border border-gray-300 rounded py-1.5 px-3.5 w-full' placeholder='Country' type="text" />
         </div>
-        <input required onChange={onChangeHandler} name='phone' value={formData.phone} className='border border-gray-300 rounded py-1.5 px-3.5 w-full' placeholder='Phome' type="number" />
+        <input required onChange={onChangeHandler} name='phone' value={formData.phone} className='border border-gray-300 rounded py-1.5 px-3.5 w-full' placeholder='Phone' type="number" />
       </div>
       {/* ---------------Right Side ----------------- */}
       <div className='mt-8'>
@@ -136,7 +147,7 @@ const PlaceOrder = () => {
           </div>
 
           <div className='w-full text-end mt-8'>
-            <button type='submit' onClick={() => navigate('/orders')} className='bg-black text-white px-16 py-3 text-sm '>PLACE ORDER</button>
+            <button type='submit' className='bg-black text-white px-16 py-3 text-sm cursor-pointer active:bg-gray-800'>PLACE ORDER</button>
           </div>
         </div>
       </div>
